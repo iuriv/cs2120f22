@@ -51,6 +51,10 @@ English language translation in a comment under the statement of
 the rule in Python.
 -/
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5779e4baff43c1917c72c67c9391c88923ed1090
 /-
 1. X ∨ Y, X ⊢ ¬Y             -- affirming the disjunct
 2. X, Y ⊢ X ∧ Y              -- and introduction
