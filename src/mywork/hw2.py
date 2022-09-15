@@ -87,6 +87,122 @@ def hw2():
     # I believe it's valid
     
     valCheck(7)
-
+    
+    # 8. Y ⊢ X ∨ Y
+    # As proposition in PL: Y -> X \/ Y
+    C8 = Implies(Y,Or(X,Y))
+    
+    s.add(Not(C8))
+    # I believe it's valid
+    
+    valCheck(8)
+    
+    # 9. X → Y, ¬X ⊢ ¬ Y
+    # As proposition in PL: (X -> Y) /\ (!X -> !Y)
+    C9 = And(Implies(X,Y),Implies(Not(X),Not(Y)))
+    
+    s.add(Not(C9))
+    # I believe it's not valid
+    
+    valCheck(9)
+    
+    # 10. X → Y, Y → X ⊢ X ↔ Y 
+    # As proposition in PL: ((x -> Y) /\ (Y -> X)) -> (X == Y)
+    C10 = Implies(And(Implies(X,Y),Implies(Y,X)),(X == Y))
+    
+    s.add(Not(C10))
+    # I believe it's valid
+    
+    valCheck(10)
+    
+    # 11. X ↔ Y ⊢ X → Y
+    # As proposition in PL: (X == Y) -> (X -> Y)
+    C11 = Implies((X == Y), Implies(X,Y))
+    
+    s.add(Not(C11))
+    # I believe it's valid
+    
+    valCheck(11)
+    
+    # 12. X ↔ Y ⊢ Y → X 
+    # As proposition in PL: (X == Y) -> (Y -> X)
+    C12 = Implies((X == Y), Implies(Y,X))
+    
+    s.add(Not(C12))
+    # I believe it's valid
+    
+    valCheck(12)
+    
+    # 13. X ∨ Y, X → Z, Y → Z ⊢ Z
+    # As proposition in PL: ((X \/ Y) /\ (X -> Z) /\ (Y -> Z)) -> Z
+    C13 = Implies(And(And(Or(X,Y),Implies(X,Z)),Implies(Y,Z)),Z)
+    
+    s.add(Not(C13))
+    # I believe it's valid
+    
+    valCheck(13)
+    
+    # 14. X → Y, Y ⊢ X 
+    # As proposition in PL: ((X -> Y) /\ Y) -> X
+    C14 = Implies(And(Implies(X,Y),Y),X)
+    
+    s.add(Not(C14))
+    # I believe it's not valid
+    
+    valCheck(14)
+    
+    # 15. X → Y, X ⊢ Y
+    # As proposition in PL: ((X -> Y) /\ X) -> Y
+    C15 = Implies(And(Implies(X,Y),X),Y)
+    
+    s.add(Not(C15))
+    # I believe it's valid
+    
+    valCheck(15)
+    
+    # 16. X → Y, Y → Z ⊢ X → Z
+    # As proposition in PL: ((X -> Y) /\ (Y -> Z)) -> (X -> Z)
+    C16 = Implies(And(Implies(X,Y),Implies(Y,Z)),Implies(X,Z))
+    
+    s.add(Not(C16))
+    # I believe it's valid
+    
+    valCheck(16)
+    
+    # 17. X → Y ⊢ Y → X
+    # As proposition in PL: (X -> Y) -> (Y -> X)
+    C17 = Implies(Implies(X,Y), Implies(Y,X))
+    
+    s.add(Not(C17))
+    # I believe it's not valid
+    
+    valCheck(17)
+    
+    # 18. X → Y ⊢ ¬Y → ¬X
+    # As proposition in PL: (X -> Y) -> (!Y -> !X)
+    C18 = Implies(Implies(X,Y), Implies(Not(Y),Not(X)))
+    
+    s.add(Not(C18))
+    # I believe it's valid
+    
+    valCheck(18)
+    
+    # 19. ¬(X ∨ Y) ↔ ¬X ∧ ¬Y
+    # As proposition in PL: (!(X \/ Y) == (!X /\ !Y))
+    C19 = (Not(Or(X,Y)) == (And(Not(X),Not(Y))))
+    
+    s.add(Not(C19))
+    # I believe it's valid
+    
+    valCheck(19)
+    
+    # 20. ¬(X ∧ Y) ↔ ¬X ∨ ¬Y
+    # As proposition in PL: ((!(X /\ Y) == (!X /\ !Y))
+    C20 = (Not(And(X,Y)) == (Or(Not(X),Not(Y))))
+    
+    s.add(Not(C20))
+    # I believe it's not valid
+    
+    valCheck(20)
 
 hw2()
