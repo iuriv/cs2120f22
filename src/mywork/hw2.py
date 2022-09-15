@@ -1,8 +1,5 @@
 # Be sure you've done pip install z3-solver
-<<<<<<< HEAD
-=======
 from telnetlib import X3PAD
->>>>>>> 5779e4baff43c1917c72c67c9391c88923ed1090
 from z3 import *
 
 
@@ -10,14 +7,23 @@ from z3 import *
 # point on a working program to solve some problem
 # of interest. Here the problem is to compute and
 # return a non-negative square root of argument, n 
+s = Solver()
+
+def valCheck(number):
+    r = s.check()
+    # If there's a model/solution return it 
+    if (r == unsat):
+        print("C" + str(number) +" is valid") 
+    # otherwise return inconsistent value for error
+    else :
+        print("Here's a counter-example: ", s.model())
+    s.reset()
+
 def hw2():
     
     
     # Create z3 variable(s) representing the unknown
-    # Here, the unknown, x, is the square root of n.
     X, Y, Z = Bools('X Y Z')
-    
-    s = Solver()
     
     # 1. X ∨ Y, X ⊢ ¬Y 
     # As proposition in PL: ((X \/ Y) /\ X) -> ~Y
@@ -25,15 +31,62 @@ def hw2():
     
     s.add(Not(C1))
     # I believe it's not valid
-  
-    r = s.check()
     
-    # If there's a model/solution return it 
-    if (r == unsat):
-        print("C1 is valid")
-    # otherwise return inconsistent value for error
-    else :
-        print("Here's a counter-example: ", s.model() )
+    valCheck(1)
+    
+    # 2. X, Y ⊢ X ∧ Y
+    # As proposition in PL: (X /\ Y) -> (X /\ Y)
+    C2 = Implies(And(X,Y),And(X,Y))
+    
+    s.add(Not(C2))
+    # I believe it's valid
+    
+    valCheck(2)
+    
+    # 3. X ∧ Y ⊢ X
+    # As proposition in PL: (X /\ Y) -> X
+    C3 = Implies(And(X,Y),X)
+    
+    s.add(Not(C3))
+    # I believe it's valid
+    
+    valCheck(3)
+    
+    # 4. X ∧ Y ⊢ Y
+    # As proposition in PL: (X /\ Y) -> Y
+    C4 = Implies(And(X,Y),Y)
+    
+    s.add(Not(C4))
+    # I believe it's valid
+    
+    valCheck(4)
+    
+    # 5. ¬¬X ⊢ X
+    # As proposition in PL: !(!X) -> X
+    C5 = Implies(Not(Not(X)),X)
+    
+    s.add(Not(C5))
+    # I believe it's valid
+    
+    valCheck(5)
+    
+    # 6. ¬(X ∧ ¬X)
+    # As proposition in PL: !(X /\ !X)
+    C6 = Not(And(X,Not(X)))
+    
+    s.add(Not(C6))
+    # I believe it's valid
+    
+    valCheck(6)
+    
+    # 7. X ⊢ X ∨ Y
+    # As proposition in PL: X -> X \/ Y
+    C7 = Implies(X,Or(X,Y))
+    
+    s.add(Not(C7))
+    # I believe it's valid
+    
+    valCheck(7)
 
 
 hw2()
