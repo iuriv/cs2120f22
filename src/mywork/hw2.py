@@ -1,3 +1,4 @@
+# Iuri Vintonyak, zsd2zp
 # Be sure you've done pip install z3-solver
 from telnetlib import X3PAD
 from z3 import *
